@@ -26,6 +26,11 @@ x.bind(this).bind(this) !== x.bind(this)
 
 ### bind(target, thisArg)
 
+The bind method takes two arguments, `target`, `thisArg`, and returns a bound function.
+
+- `target`: the target function
+- `thisArg`: The value to be passed as the this parameter to the target function when the bound function is called.
+
 ```js
 import bind from "idempotent-bind"
 import {EventEmitter} from "events"
