@@ -13,11 +13,15 @@
   },
   "version": "1.0.0",
   "description": "idempotent `bind` function library.",
-  "main": "index.js",
+  "main": "lib/idempotent-bind.js",
+  "files": [
+    "lib"
+  ],
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "build": "babel src --out-dir lib -s inline",
     "test": "mocha"
   },
   "keywords": [
