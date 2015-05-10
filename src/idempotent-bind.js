@@ -2,6 +2,19 @@
 "use strict";
 import WeakMap from "es6-weak-map"
 var map = new WeakMap();
+// for WeakMap Reference, not to use bind
+function getGlobal() {
+    if (typeof global !== "undefined") {
+        return global;
+    }
+    if (typeof window !== "undefined") {
+        return window;
+    }
+    // web worker
+    if (typeof  self !== "undefined") {
+        return self;
+    }
+}
 function createBind(target, thisArg) {
     var binding = target.bind(thisArg);
     var secondMap = map.get(target);
@@ -33,7 +46,7 @@ export function bind(target, thisArg) {
     var secondMap = map.get(target);
     // need to save the bound function into WeakMp.
     if (thisArg == null) {
-        thisArg = global || window || window.self;
+        thisArg = getGlobal();
     }
     // cached
     if (secondMap != null) {
@@ -55,7 +68,7 @@ export function unbind(target, thisArg) {
     }
     // need to remove the bound function from WeakMp.
     if (thisArg == null) {
-        thisArg = global || window || window.self;
+        thisArg = getGlobal();
     }
     if (map.has(target)) {
         let secondMap = map.get(target);
