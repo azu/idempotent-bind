@@ -75,6 +75,8 @@ import { bind, unbind } from "idempotent-bind"
 import assert from "assert"
 var f = function () {};
 var g = bind(f, this);
+assert(g === bind(f, this));
+// unbind!!
 unbind(f, this);
 assert(g !== bind(f, this));
 ```
