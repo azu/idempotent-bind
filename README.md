@@ -61,7 +61,7 @@ class Component {
 ### unbind(target, thisArg)
 
 The `unbind` method takes two arguments, `target`, `thisArg`, and **returns a bound function**.
-This `unbind` behavior similar to `removeChild`.
+This `unbind` behavior is similar to `removeChild`.
 
 ```js
 var oldChild = element.removeChild(child) 
