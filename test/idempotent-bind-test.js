@@ -35,5 +35,11 @@ describe("idempotent-bind", function () {
             unbind(f, null);
             assert(g !== bind(f, null));
         });
+        it("should return bound function", function () {
+            var f = function () {
+            };
+            var g = bind(f, null);
+            assert(g === unbind(f, null));
+        });
     });
 });

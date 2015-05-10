@@ -60,7 +60,9 @@ export function bind(target, thisArg) {
  * unbind the binding(target, thisArg)
  * manually unbind function.
  * @param {Function} target
- * @param thisArg
+ * @param {T} thisArg
+ * @returns {function(this:T)} the bound function
+ * @template T
  */
 export function unbind(target, thisArg) {
     if (typeof target !== "function") {
@@ -72,6 +74,8 @@ export function unbind(target, thisArg) {
     }
     if (map.has(target)) {
         let secondMap = map.get(target);
+        var boundFn = secondMap.get(thisArg);
         releaseBind(secondMap, thisArg);
+        return boundFn;
     }
 }
