@@ -31,7 +31,7 @@ function releaseBind(secondMap, thisArg) {
  */
 export function bind(target, thisArg) {
     var secondMap = map.get(target);
-    // need to save the bound function into weakmap.
+    // need to save the bound function into WeakMp.
     if (thisArg == null) {
         thisArg = global || window || window.self;
     }
@@ -52,6 +52,10 @@ export function bind(target, thisArg) {
 export function unbind(target, thisArg) {
     if (typeof target !== "function") {
         throw new Error("target must be function.");
+    }
+    // need to remove the bound function from WeakMp.
+    if (thisArg == null) {
+        thisArg = global || window || window.self;
     }
     if (map.has(target)) {
         let secondMap = map.get(target);
