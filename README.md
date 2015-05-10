@@ -37,13 +37,13 @@ import {EventEmitter} from "events"
 const emitter = new EventEmitter();
 
 class Component {
-	didAppear(){
+	componentWillMount(){
 		emitter.on("change", bind(this.onChange, this));
 	}
 	onChange(){
 		// do something
 	}
-	didDisappear(){
+	componentWillUnmount(){
 		// `unbind` release `bind` from Reference Cache Map and return the bound function.
 		emitter.removeListener("change", unbind(this.onChange, this));
 		// == emitter.removeListener("change", bind(this.onChange, this));
