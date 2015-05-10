@@ -32,7 +32,7 @@ The bind method takes two arguments, `target`, `thisArg`, and returns a bound fu
 - `thisArg`: The value to be passed as the this parameter to the target function when the bound function is called.
 
 ```js
-import bind from "idempotent-bind"
+import { bind, unbind } from "idempotent-bind"
 import {EventEmitter} from "events"
 const emitter = new EventEmitter();
 
@@ -45,6 +45,7 @@ class Component {
 	}
 	didDisappear(){
 		emitter.removeListener("change", bind(this.onChange, this));
+		unbind(this.onChange, this);// manually unbind. not need if WeakMap is work on the UA...
 	}
 }
 ```
@@ -52,9 +53,28 @@ class Component {
 
 `bind` is not support `[, arg1 [, arg2, …]` like [`Function.prototype.bind (thisArg [, arg1 [, arg2, …]])`](http://ecma-international.org/ecma-262/5.1/#sec-15.3.4.5).
 
+
+### unbind(target, thisArg)
+
+Unbind the binding `target` and `thisArg`.
+manually unbind function.
+
+- `target`: the target function
+- `thisArg`: The value to be passed as the this parameter to the target function when the bound function is called.
+
+```js
+import { bind, unbind } from "idempotent-bind"
+import assert from "assert"
+var f = function () {};
+var g = bind(f, this);
+unbind(f, this);
+assert(g !== bind(f, this));
+```
+
+
 ## Tests
 
-- [ ] Write How to Tests
+	npm test
 
 ## Contributing
 
