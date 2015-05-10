@@ -1,4 +1,4 @@
-# idempotent-bind 
+# idempotent-bind [![Build Status](https://travis-ci.org/azu/idempotent-bind.svg?branch=master)](https://travis-ci.org/azu/idempotent-bind)
 
 idempotent `bind` function library.
 
