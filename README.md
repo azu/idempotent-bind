@@ -20,7 +20,9 @@ x.bind(this).bind(this) !== x.bind(this)
 
 ## Installation
 
-- [ ] Describe the installation process
+```sh
+npm install idempotent-bind
+```
 
 ## Usage
 
@@ -84,7 +86,9 @@ assert(g !== bind(f, this));
 
 ## Tests
 
-	npm test
+```sh
+npm test
+```
 
 ## Contributing
 
