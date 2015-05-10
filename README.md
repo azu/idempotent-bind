@@ -44,8 +44,10 @@ class Component {
 		// do something
 	}
 	didDisappear(){
-		emitter.removeListener("change", bind(this.onChange, this));
-		unbind(this.onChange, this);// manually unbind. not need if WeakMap is work on the UA...
+		// `unbind` release `bind` from Reference Cache Map and return the bound function.
+		emitter.removeListener("change", unbind(this.onChange, this));
+		// == emitter.removeListener("change", bind(this.onChange, this));
+		// but not release the Reference Cache Map.
 	}
 }
 ```
@@ -56,8 +58,14 @@ class Component {
 
 ### unbind(target, thisArg)
 
-Unbind the binding `target` and `thisArg`.
-manually unbind function.
+The `unbind` method takes two arguments, `target`, `thisArg`, and **returns a bound function**.
+This `unbind` behavior similar to `removeChild`.
+
+```js
+var oldChild = element.removeChild(child) 
+```
+
+two arguments is the same as `bind` function.
 
 - `target`: the target function
 - `thisArg`: The value to be passed as the this parameter to the target function when the bound function is called.
