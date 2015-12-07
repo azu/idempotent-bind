@@ -11,7 +11,7 @@ function getGlobal() {
         return window;
     }
     // web worker
-    if (typeof  self !== "undefined") {
+    if (typeof self !== "undefined") {
         return self;
     }
 }
