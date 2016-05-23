@@ -19,6 +19,12 @@ describe("idempotent-bind", function () {
             };
             assert(bind(f, null) === bind(f, null));
         });
+
+        it("supports implicit `target` from callee's `this`", function () {
+            var f = function () {
+            };
+            assert(bind.call(f, this) === bind.call(f, this));
+        });
     });
     describe("#unbind", function () {
         it("should release binding", function () {
@@ -40,6 +46,13 @@ describe("idempotent-bind", function () {
             };
             var g = bind(f, null);
             assert(g === unbind(f, null));
+        });
+        it("should release binding for implicit `target`", function () {
+            var f = function () {
+            };
+            var g = bind.call(f, this);
+            unbind.call(f, this);
+            assert(g !== bind.call(f, this));
         });
     });
 });

@@ -43,6 +43,13 @@ function releaseBind(secondMap, thisArg) {
  * @template T
  */
 export function bind(target, thisArg) {
+    // support for `bind.call(func, this);`
+    // see https://github.com/azu/idempotent-bind/pull/1
+    if (this !== undefined) {
+        target = this;
+        thisArg = target;
+    }
+
     var secondMap = map.get(target);
     // need to save the bound function into WeakMp.
     if (thisArg == null) {
@@ -65,6 +72,11 @@ export function bind(target, thisArg) {
  * @template T
  */
 export function unbind(target, thisArg) {
+    if (this !== undefined) {
+        target = this;
+        thisArg = target;
+    }
+
     if (typeof target !== "function") {
         throw new Error("target must be function.");
     }
